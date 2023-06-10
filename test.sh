@@ -1,0 +1,1 @@
+python testing.py --input_path "./TestData/input_100L/" --result_path "./TestData/results_100L/" --model_path "./model/model_L"
