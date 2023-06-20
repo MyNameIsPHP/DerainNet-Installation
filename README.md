@@ -15,7 +15,7 @@ pip install scikit-image==0.17.2
 ## Datasets
 
 To train the models, please download the synthetic datasets (Rain100L, Rain100H, Rain1400) and and place the unzipped folders into the project folder:
-https://drive.google.com/file/d/19ZGs_18bjkTlwHn-9yAKDyrSDA9ebZRc/view?usp=sharing
+https://drive.google.com/file/d/1PES0IFPQ24MxpP1_6f_TvSBw4U8KdK_E/view?usp=sharing
 
 
 ## Getting Started
