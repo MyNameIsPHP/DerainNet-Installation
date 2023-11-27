@@ -68,15 +68,31 @@ def _parse_function(filename, label):
 if __name__ == '__main__':
 
    RainName = os.listdir(input_path)
+   RainName.sort(key=lambda x: int(re.search(r'\d+', x.split('_')[0]).group()))
+   print(RainName)  
    for i in range(len(RainName)):
       RainName[i] = input_path + RainName[i]
-      
-   LabelName = os.listdir(gt_path)    
+   LabelName = os.listdir(gt_path)
+   LabelName.sort(key=lambda x: int(re.search(r'\d+', x).group()))  # Sort based on the whole numeric part
+   
    for i in range(len(LabelName)):
        LabelName[i] = gt_path + LabelName[i] 
-    
+   
+   LabelName_ = []
+   
+   if (len(RainName) != len(LabelName)):
+      
+      multi = int(len(RainName) / len(LabelName))
+      for i in range(len(LabelName)):
+         for j in range(multi):
+            LabelName_.append(LabelName[i])
+   else:
+      LabelName_ = LabelName
+   
    filename_tensor = tf.convert_to_tensor(RainName, dtype=tf.string)  
-   labels_tensor = tf.convert_to_tensor(LabelName, dtype=tf.string)   
+   labels_tensor = tf.convert_to_tensor(LabelName_, dtype=tf.string) 
+   
+   # if filename_tensor != labels_tensor
    dataset = tf.data.Dataset.from_tensor_slices((filename_tensor, labels_tensor))
    dataset = dataset.map(_parse_function)    
    dataset = dataset.prefetch(buffer_size=batch_size * 10)
